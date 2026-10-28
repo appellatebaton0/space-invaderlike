@@ -1,0 +1,72 @@
+[gd_scene format=3 uid="uid://inaarl66rlhu"]
+
+[ext_resource type="Texture2D" uid="uid://n57pjqwhma12" path="res://Assets/Enemies/TankEnemy/TankEnemy.png" id="1_i1n2g"]
+[ext_resource type="Script" uid="uid://cfe5trnceb03e" path="res://Scenes/Enemies/TankEnemy/TankEnemy.gd" id="1_kbh5f"]
+[ext_resource type="Script" uid="uid://d3ep6iiomabu5" path="res://Scenes/Healthbox/Hurtbox/Hurtbox.gd" id="2_kbh5f"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_mo5nd"]
+size = Vector2(24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0iwi0"]
+atlas = ExtResource("1_i1n2g")
+region = Rect2(0, 0, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qjdrk"]
+atlas = ExtResource("1_i1n2g")
+region = Rect2(24, 0, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wl0qs"]
+atlas = ExtResource("1_i1n2g")
+region = Rect2(48, 0, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_frnl2"]
+atlas = ExtResource("1_i1n2g")
+region = Rect2(24, 0, 24, 24)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_2qa4f"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0iwi0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qjdrk")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wl0qs")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_frnl2")
+}],
+"loop": 1,
+"name": &"default",
+"speed": 1.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_2qa4f"]
+size = Vector2(26, 26)
+
+[node name="TankEnemy" type="CharacterBody2D" unique_id=657785 groups=["Enemies"]]
+z_index = 2
+collision_layer = 2
+collision_mask = 0
+script = ExtResource("1_kbh5f")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1950713473]
+shape = SubResource("RectangleShape2D_mo5nd")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=629994654]
+sprite_frames = SubResource("SpriteFrames_2qa4f")
+autoplay = "default"
+frame_progress = 0.8415301
+
+[node name="Hurtbox" type="Area2D" parent="." unique_id=478253650]
+collision_layer = 4
+collision_mask = 8
+script = ExtResource("2_kbh5f")
+max_health = 16
+invincibility_time = 0.2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox" unique_id=1377091201]
+shape = SubResource("RectangleShape2D_2qa4f")
+debug_color = Color(0.7, 0, 0, 0.38039216)

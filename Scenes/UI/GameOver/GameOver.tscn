@@ -1,0 +1,202 @@
+[gd_scene format=3 uid="uid://dt6omyskmqdr3"]
+
+[ext_resource type="Script" uid="uid://bv8uvitblkjsx" path="res://Scenes/UI/GameOver/GameOver.gd" id="1_f5tak"]
+[ext_resource type="Theme" uid="uid://n1m77nfmwqix" path="res://Assets/UI/Theme.tres" id="1_fdutk"]
+[ext_resource type="Script" uid="uid://c5kv2lh00pvar" path="res://Scenes/UI/SlapControl/SlapControl.gd" id="1_sshtg"]
+[ext_resource type="FontFile" uid="uid://csia8u00xscjp" path="res://Assets/UI/PressStartRegular-ay8E.ttf" id="1_tsk0b"]
+[ext_resource type="FontFile" uid="uid://d1l457nmr6ot1" path="res://Assets/UI/MegamaxJonathanToo-YqOq2.ttf" id="3_jho6m"]
+
+[sub_resource type="Shader" id="Shader_quwm4"]
+code = "shader_type canvas_item;
+
+uniform vec2 multiplier = vec2(2.);
+
+uniform vec4 transition_color_a:source_color = vec4(1.0);
+uniform vec4 transition_color_b:source_color = vec4(1.0);
+
+uniform float density = 100.;
+uniform float speed = 20.0;
+
+//// A linear function that passes through (0.5, 0.5), with a slope that makes
+//// it start at (0.5 - smoothing) and end at (0.5 + smoothing), and then clamps
+//// where it leaves 0.0 - 1.0 to those values.
+//float ease(float a)
+//{
+	//if (a < 0.5 - smoothing){return 0.0;}
+	//if (a > 0.5 + smoothing){return 1.0;}
+	//return (a - 0.5) / (2.0 * smoothing) + 0.5;
+//}
+//
+//// Stretches the given value vertically, keeping (0.5,0.5) the same.
+//// Used to transform a threshold range from (0.0 - 1.0) to 
+//// (0.0 - smoothing, 1.0 + smoothing).
+//float stretch(float a)
+//{
+	//return (2.0*smoothing + 1.0) * a - smoothing;
+//}
+
+// Combined the old calculation functions into one.
+// Same as ease(a - 0.5 + stretch(threshold))
+
+vec4 get_color(vec2 uv)
+{
+	
+	if (int((uv.x - uv.y + (speed * TIME)) * density) % 2 == 1)
+	{
+		return transition_color_b;
+	}
+	
+	return transition_color_a;
+}
+
+void fragment() {
+	
+	vec2 new_uv = floor(UV * multiplier) / multiplier;
+	
+	COLOR = get_color(new_uv);
+	
+	// DEBUG VIEW
+	//COLOR.b = index;
+	//COLOR.r = texture(noise, new_uv).r;
+}
+"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_2qa4f"]
+shader = SubResource("Shader_quwm4")
+shader_parameter/multiplier = Vector2(192, 288)
+shader_parameter/transition_color_a = Color(0.050980393, 0, 0.101960786, 1)
+shader_parameter/transition_color_b = Color(0.18039216, 0.039215688, 0.1882353, 1)
+shader_parameter/density = 10.0
+shader_parameter/speed = 0.1
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2qa4f"]
+content_margin_left = 15.0
+content_margin_top = 4.0
+content_margin_right = 15.0
+content_margin_bottom = 4.0
+bg_color = Color(0.050980393, 0, 0.101960786, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.43137255, 0.31764707, 0.5058824, 1)
+
+[node name="GameOver" type="Control" unique_id=1817115671]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_fdutk")
+script = ExtResource("1_f5tak")
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=623311067]
+material = SubResource("ShaderMaterial_2qa4f")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=856239279]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 40
+theme_override_constants/margin_top = 45
+theme_override_constants/margin_right = 40
+theme_override_constants/margin_bottom = 45
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer" unique_id=67360791]
+layout_mode = 2
+theme_override_constants/separation = 11
+
+[node name="Title" type="Label" parent="MarginContainer/VBoxContainer" unique_id=865929370]
+layout_mode = 2
+offset_transform_enabled = true
+theme_override_fonts/font = ExtResource("1_tsk0b")
+text = "MISSION FAILED"
+horizontal_alignment = 1
+
+[node name="Control" type="Control" parent="MarginContainer/VBoxContainer" unique_id=671279557]
+layout_mode = 2
+
+[node name="Score" type="Label" parent="MarginContainer/VBoxContainer" unique_id=1115084861]
+layout_mode = 2
+size_flags_horizontal = 3
+offset_transform_enabled = true
+theme_override_fonts/font = ExtResource("3_jho6m")
+theme_override_font_sizes/font_size = 13
+text = "<null>"
+horizontal_alignment = 1
+script = ExtResource("1_sshtg")
+
+[node name="Highscore" type="Label" parent="MarginContainer/VBoxContainer" unique_id=759890351]
+layout_mode = 2
+size_flags_horizontal = 3
+offset_transform_enabled = true
+theme_override_fonts/font = ExtResource("3_jho6m")
+theme_override_font_sizes/font_size = 12
+text = "<null>"
+horizontal_alignment = 1
+script = ExtResource("1_sshtg")
+
+[node name="NewHighscore" type="Label" parent="MarginContainer/VBoxContainer" unique_id=966618578]
+layout_mode = 2
+size_flags_horizontal = 3
+offset_transform_enabled = true
+theme_override_fonts/font = ExtResource("3_jho6m")
+theme_override_font_sizes/font_size = 12
+text = "NEW HIGH SCORE!"
+horizontal_alignment = 1
+script = ExtResource("1_sshtg")
+
+[node name="Control2" type="Control" parent="MarginContainer/VBoxContainer" unique_id=1179371155]
+layout_mode = 2
+
+[node name="Depth" type="Label" parent="MarginContainer/VBoxContainer" unique_id=52881298]
+layout_mode = 2
+size_flags_horizontal = 3
+offset_transform_enabled = true
+theme_override_fonts/font = ExtResource("3_jho6m")
+theme_override_font_sizes/font_size = 13
+text = "DEPTH: 0000"
+horizontal_alignment = 1
+script = ExtResource("1_sshtg")
+
+[node name="Highdepth" type="Label" parent="MarginContainer/VBoxContainer" unique_id=1873330580]
+layout_mode = 2
+size_flags_horizontal = 3
+offset_transform_enabled = true
+theme_override_fonts/font = ExtResource("3_jho6m")
+theme_override_font_sizes/font_size = 12
+text = "BEST DEPTH: 0000"
+horizontal_alignment = 1
+script = ExtResource("1_sshtg")
+
+[node name="NewHighdepth" type="Label" parent="MarginContainer/VBoxContainer" unique_id=981631178]
+layout_mode = 2
+size_flags_horizontal = 3
+offset_transform_enabled = true
+theme_override_fonts/font = ExtResource("3_jho6m")
+theme_override_font_sizes/font_size = 12
+text = "NEW BEST DEPTH!"
+horizontal_alignment = 1
+script = ExtResource("1_sshtg")
+
+[node name="Button" type="Button" parent="MarginContainer/VBoxContainer" unique_id=531574336]
+layout_mode = 2
+size_flags_horizontal = 4
+offset_transform_enabled = true
+theme_override_fonts/font = ExtResource("3_jho6m")
+theme_override_font_sizes/font_size = 12
+theme_override_styles/normal = SubResource("StyleBoxFlat_2qa4f")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_2qa4f")
+theme_override_styles/hover = SubResource("StyleBoxFlat_2qa4f")
+text = "-> RETURN"
+script = ExtResource("1_sshtg")

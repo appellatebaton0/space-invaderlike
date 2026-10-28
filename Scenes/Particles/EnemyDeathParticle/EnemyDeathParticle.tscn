@@ -1,0 +1,37 @@
+[gd_scene format=3 uid="uid://shc3qqw64hjs"]
+
+[ext_resource type="Script" uid="uid://d0ihpvee4fvwp" path="res://Scenes/Particles/SingleParticle.gd" id="1_e7hg2"]
+
+[sub_resource type="Gradient" id="Gradient_tbx3a"]
+offsets = PackedFloat32Array(0)
+colors = PackedColorArray(0.43451998, 0.3213, 0.51, 0.84705883)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_quwm4"]
+gradient = SubResource("Gradient_tbx3a")
+width = 8
+height = 8
+
+[sub_resource type="Curve" id="Curve_60jb5"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_tbx3a"]
+curve = SubResource("Curve_60jb5")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_2qa4f"]
+particle_flag_disable_z = true
+emission_shape = 3
+emission_box_extents = Vector3(8, 8, 1)
+spread = 180.0
+initial_velocity_min = 10.0
+initial_velocity_max = 20.0
+gravity = Vector3(0, 0, 0)
+alpha_curve = SubResource("CurveTexture_tbx3a")
+
+[node name="EnemyDeathParticle" type="GPUParticles2D" unique_id=1539638960]
+amount = 6
+texture = SubResource("GradientTexture2D_quwm4")
+lifetime = 1.5
+explosiveness = 1.0
+process_material = SubResource("ParticleProcessMaterial_2qa4f")
+script = ExtResource("1_e7hg2")

@@ -1,0 +1,213 @@
+[gd_scene format=3 uid="uid://dkawb4yy4l7so"]
+
+[ext_resource type="Theme" uid="uid://n1m77nfmwqix" path="res://Assets/UI/Theme.tres" id="1_ehq06"]
+[ext_resource type="Script" uid="uid://co3emnt3473ei" path="res://Scenes/UI/MainMenu/MainMenu.gd" id="1_les83"]
+[ext_resource type="Texture2D" uid="uid://cw6i81o3ceukh" path="res://Assets/UI/Menus/MainMenu.png" id="3_7nukq"]
+[ext_resource type="Texture2D" uid="uid://dkysw6pedjjha" path="res://Assets/UI/Buttons/ButtonLeft.png" id="5_67d64"]
+[ext_resource type="Texture2D" uid="uid://8ftpljvocbhf" path="res://Assets/UI/Buttons/ButtonUp.png" id="5_tc2ed"]
+[ext_resource type="Texture2D" uid="uid://d0ukvkwpwyits" path="res://Assets/UI/Buttons/ButtonRight.png" id="6_6swpd"]
+[ext_resource type="Texture2D" uid="uid://g0isfh73ssre" path="res://Assets/UI/Buttons/ButtonDown.png" id="7_u8hla"]
+[ext_resource type="FontFile" uid="uid://btb3jaqyw68u6" path="res://Assets/UI/monogram.ttf" id="8_6swpd"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tbwd8"]
+atlas = ExtResource("5_67d64")
+region = Rect2(0, 0, 26, 23)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_geava"]
+atlas = ExtResource("5_67d64")
+region = Rect2(52, 0, 26, 23)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_67d64"]
+atlas = ExtResource("5_67d64")
+region = Rect2(26, 0, 26, 23)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6swpd"]
+atlas = ExtResource("5_tc2ed")
+region = Rect2(0, 0, 26, 23)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_u8hla"]
+atlas = ExtResource("5_tc2ed")
+region = Rect2(52, 0, 26, 23)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rd75r"]
+atlas = ExtResource("5_tc2ed")
+region = Rect2(26, 0, 26, 23)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_smnk6"]
+atlas = ExtResource("7_u8hla")
+region = Rect2(0, 0, 26, 23)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_selod"]
+atlas = ExtResource("7_u8hla")
+region = Rect2(52, 0, 26, 23)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jd0v2"]
+atlas = ExtResource("7_u8hla")
+region = Rect2(26, 0, 26, 23)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2qa4f"]
+atlas = ExtResource("6_6swpd")
+region = Rect2(0, 0, 26, 23)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vwuc7"]
+atlas = ExtResource("6_6swpd")
+region = Rect2(52, 0, 26, 23)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nw82n"]
+atlas = ExtResource("6_6swpd")
+region = Rect2(26, 0, 26, 23)
+
+[sub_resource type="FontVariation" id="FontVariation_u8hla"]
+base_font = ExtResource("8_6swpd")
+
+[sub_resource type="Animation" id="Animation_6swpd"]
+resource_name = "BOOT"
+length = 3.4000000000000004
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Display:text")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 3.3333333),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": ["BOOTING...", "----
+
+NEBULOUS
+
+----
+
+START
+
+OPTIONS
+
+QUIT
+
+---"]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Display:visible_ratio")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.26666665, 2.3, 3.0333333, 3.3333333),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [0.0, 0.7, 1.0, 1.0, 0.0]
+}
+
+[sub_resource type="Animation" id="Animation_u8hla"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Display:text")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": ["BOOTING..."]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Display:visible_ratio")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_tbwd8"]
+_data = {
+&"BOOT": SubResource("Animation_6swpd"),
+&"RESET": SubResource("Animation_u8hla")
+}
+
+[node name="MainMenu" type="Control" unique_id=1761288941]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_ehq06")
+script = ExtResource("1_les83")
+
+[node name="Backdrop" type="TextureRect" parent="." unique_id=2081472469]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("3_7nukq")
+
+[node name="LeftButton" type="TextureButton" parent="." unique_id=1728067214]
+layout_mode = 0
+offset_left = 275.0
+offset_top = 134.0
+offset_right = 301.0
+offset_bottom = 157.0
+texture_normal = SubResource("AtlasTexture_tbwd8")
+texture_pressed = SubResource("AtlasTexture_geava")
+texture_hover = SubResource("AtlasTexture_67d64")
+texture_disabled = SubResource("AtlasTexture_geava")
+
+[node name="UpButton" type="TextureButton" parent="." unique_id=193446324]
+layout_mode = 0
+offset_left = 305.0
+offset_top = 121.0
+offset_right = 331.0
+offset_bottom = 144.0
+texture_normal = SubResource("AtlasTexture_6swpd")
+texture_pressed = SubResource("AtlasTexture_u8hla")
+texture_hover = SubResource("AtlasTexture_rd75r")
+texture_disabled = SubResource("AtlasTexture_u8hla")
+
+[node name="DownButton" type="TextureButton" parent="." unique_id=1767470558]
+layout_mode = 0
+offset_left = 305.0
+offset_top = 146.0
+offset_right = 331.0
+offset_bottom = 169.0
+texture_normal = SubResource("AtlasTexture_smnk6")
+texture_pressed = SubResource("AtlasTexture_selod")
+texture_hover = SubResource("AtlasTexture_jd0v2")
+texture_disabled = SubResource("AtlasTexture_selod")
+
+[node name="RightButton" type="TextureButton" parent="." unique_id=1589560654]
+layout_mode = 0
+offset_left = 335.0
+offset_top = 134.0
+offset_right = 361.0
+offset_bottom = 157.0
+texture_normal = SubResource("AtlasTexture_2qa4f")
+texture_pressed = SubResource("AtlasTexture_vwuc7")
+texture_hover = SubResource("AtlasTexture_nw82n")
+texture_disabled = SubResource("AtlasTexture_vwuc7")
+
+[node name="Display" type="Label" parent="." unique_id=524620761]
+layout_mode = 0
+offset_left = 41.0
+offset_top = 41.0
+offset_right = 81.0
+offset_bottom = 58.0
+theme_override_constants/line_spacing = -5
+theme_override_fonts/font = SubResource("FontVariation_u8hla")
+theme_override_font_sizes/font_size = 24
+text = "BOOTING..."
+visible_characters = 0
+visible_ratio = 0.0
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1931114767]
+libraries/ = SubResource("AnimationLibrary_tbwd8")

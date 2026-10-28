@@ -1,0 +1,18 @@
+[gd_scene format=3 uid="uid://bpffws38d4enr"]
+
+[ext_resource type="AudioStream" uid="uid://c0md7uqtejbbv" path="res://Assets/Music/GameMusic.mp3" id="1_62nlw"]
+[ext_resource type="AudioStream" uid="uid://djjcofgtcofhb" path="res://Assets/Music/MenuMusic.ogg" id="2_tbe82"]
+[ext_resource type="Script" uid="uid://4yb70swdje6j" path="res://Scenes/Globals/MusicPlayer.gd" id="3_tbe82"]
+
+[sub_resource type="AudioStreamSynchronized" id="AudioStreamSynchronized_2qa4f"]
+stream_count = 2
+stream_0/stream = ExtResource("1_62nlw")
+stream_0/volume = -60.0
+stream_1/stream = ExtResource("2_tbe82")
+stream_1/volume = -60.0
+
+[node name="MusicPlayer" type="AudioStreamPlayer" unique_id=2061368319]
+stream = SubResource("AudioStreamSynchronized_2qa4f")
+autoplay = true
+bus = &"Music"
+script = ExtResource("3_tbe82")

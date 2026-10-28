@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://ytjv6sshwlkt"]
+
+[ext_resource type="Script" uid="uid://bi4ydwnlnh8lf" path="res://Scenes/Globals/SFXRegister.gd" id="1_rbi5h"]
+
+[node name="SFXRegister" type="Node" unique_id=775355946]
+script = ExtResource("1_rbi5h")

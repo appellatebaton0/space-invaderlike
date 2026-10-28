@@ -1,0 +1,85 @@
+[gd_scene format=3 uid="uid://y8c6iab1rt00"]
+
+[ext_resource type="Script" uid="uid://bju64exooehg5" path="res://Scenes/Enemies/BeamEnemy/BeamEnemy.gd" id="1_5ujcv"]
+[ext_resource type="Script" uid="uid://d3ep6iiomabu5" path="res://Scenes/Healthbox/Hurtbox/Hurtbox.gd" id="1_aiivt"]
+[ext_resource type="Texture2D" uid="uid://ck5am4ijplrix" path="res://Assets/Enemies/BeamEnemy/BeamEnemy.png" id="3_a2c1m"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_5ujcv"]
+size = Vector2(24, 24)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_2qa4f"]
+size = Vector2(26, 26)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7cjis"]
+atlas = ExtResource("3_a2c1m")
+region = Rect2(72, 0, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1kwdn"]
+atlas = ExtResource("3_a2c1m")
+region = Rect2(0, 0, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_din83"]
+atlas = ExtResource("3_a2c1m")
+region = Rect2(24, 0, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gxj62"]
+atlas = ExtResource("3_a2c1m")
+region = Rect2(48, 0, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_v30ps"]
+atlas = ExtResource("3_a2c1m")
+region = Rect2(24, 0, 24, 24)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_2qa4f"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7cjis")
+}],
+"loop": 1,
+"name": &"attack",
+"speed": 1.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1kwdn")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_din83")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gxj62")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_v30ps")
+}],
+"loop": 1,
+"name": &"default",
+"speed": 2.0
+}]
+
+[node name="BeamEnemy" type="CharacterBody2D" unique_id=657785 groups=["Enemies"]]
+z_index = 2
+collision_layer = 2
+collision_mask = 0
+script = ExtResource("1_5ujcv")
+beam_duration_range = Vector2(1.6, 2.6)
+shoot_frequency_range = Vector2(3.4, 6.5)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1950713473]
+shape = SubResource("RectangleShape2D_5ujcv")
+
+[node name="Hurtbox" type="Area2D" parent="." unique_id=478253650]
+collision_layer = 4
+collision_mask = 8
+script = ExtResource("1_aiivt")
+max_health = 12
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox" unique_id=1377091201]
+shape = SubResource("RectangleShape2D_2qa4f")
+debug_color = Color(0.7, 0, 0, 0.38039216)
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1710509406]
+sprite_frames = SubResource("SpriteFrames_2qa4f")
+autoplay = "default"
+frame_progress = 0.6889072

@@ -1,0 +1,58 @@
+[gd_scene format=3 uid="uid://dn3nkdteca61r"]
+
+[ext_resource type="Script" uid="uid://b6bv8g0tee8xg" path="res://Scenes/Enemies/BasicEnemy/BasicEnemy.gd" id="1_q5e7w"]
+[ext_resource type="Texture2D" uid="uid://dmexylsqd5tra" path="res://Assets/Enemies/BasicEnemy/BasicEnemy.png" id="2_bs6dw"]
+[ext_resource type="Script" uid="uid://d3ep6iiomabu5" path="res://Scenes/Healthbox/Hurtbox/Hurtbox.gd" id="3_bs6dw"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_mo5nd"]
+size = Vector2(24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_t5rv6"]
+atlas = ExtResource("2_bs6dw")
+region = Rect2(0, 0, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fa1un"]
+atlas = ExtResource("2_bs6dw")
+region = Rect2(24, 0, 24, 24)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_2qa4f"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_t5rv6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fa1un")
+}],
+"loop": 1,
+"name": &"default",
+"speed": 1.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_2qa4f"]
+size = Vector2(26, 26)
+
+[node name="BasicEnemy" type="CharacterBody2D" unique_id=657785 groups=["Enemies"]]
+z_index = 2
+collision_layer = 2
+collision_mask = 0
+script = ExtResource("1_q5e7w")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1950713473]
+shape = SubResource("RectangleShape2D_mo5nd")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=629994654]
+sprite_frames = SubResource("SpriteFrames_2qa4f")
+autoplay = "default"
+frame_progress = 0.31653157
+
+[node name="Hurtbox" type="Area2D" parent="." unique_id=478253650]
+collision_layer = 4
+collision_mask = 8
+script = ExtResource("3_bs6dw")
+max_health = 8
+invincibility_time = 0.2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox" unique_id=1377091201]
+shape = SubResource("RectangleShape2D_2qa4f")
+debug_color = Color(0.7, 0, 0, 0.38039216)
