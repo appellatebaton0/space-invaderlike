@@ -1,0 +1,13 @@
+[gd_resource type="Theme" format=3 uid="uid://n1m77nfmwqix"]
+
+[ext_resource type="FontFile" uid="uid://d1l457nmr6ot1" path="res://Assets/UI/MegamaxJonathanToo-YqOq2.ttf" id="1_ddyl2"]
+
+[sub_resource type="StyleBoxLine" id="StyleBoxLine_2qa4f"]
+color = Color(0.30980393, 0.078431375, 0.27450982, 1)
+thickness = 4
+
+[resource]
+Button/colors/font_color = Color(0.42352942, 0.92941177, 0.92941177, 1)
+HSeparator/styles/separator = SubResource("StyleBoxLine_2qa4f")
+Label/colors/font_color = Color(0.42352942, 0.92941177, 0.92941177, 1)
+Label/fonts/font = ExtResource("1_ddyl2")

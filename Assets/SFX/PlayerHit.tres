@@ -1,0 +1,8 @@
+[gd_resource type="AudioStreamRandomizer" format=3 uid="uid://dbeikt05y6q04"]
+
+[ext_resource type="AudioStream" uid="uid://pa0x8gt4wirc" path="res://Assets/SFX/Hit.wav" id="1_r370p"]
+
+[resource]
+random_pitch = 1.0293022
+streams_count = 1
+stream_0/stream = ExtResource("1_r370p")
